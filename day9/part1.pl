@@ -1,5 +1,4 @@
 
-#my %graph = (A => {B=>1,C=>4}, B => {A=>1,C=>2}, C => {A=>4,B=>2});
 my %graph = ();
 open(HANDLE, 'input.txt');
 @lines = <HANDLE>;
@@ -7,7 +6,6 @@ chomp @lines;
 for (@lines) {
   if (/(\w*)\sto\s(\w*)\s=\s(\d*)/) {
     ($city1, $city2, $weight) = ($1, $2, $3);
-
     # add first city path
     if ($graph{$city1}) {
       $graph{$city1}{$city2} = $weight;
@@ -44,23 +42,3 @@ while (my @perm = $p_iterator->next) {
 }
 
 print "Shortest distance is $longestDistance for @longestPerm\n\n";
-
-# for $c (keys %graph) {
-#   print "$c: {";
-#   for (keys $graph{$c}) {
-#     print $_."=>".$graph{$c}{$_}." ";
-#   }
-#   print "}\n";
-# }
-
-
-exit;
-use Paths::Graph;
-
-my $g = Paths::Graph->new(-origin=>"A",-destiny=>"C",-graph=>\%graph);
-
-my @paths = $g->shortest_path();
-
-for my $path (@paths) {
-        print "Shortest Path:" . join ("->" , @$path) . " Cost:". $g->get_path_cost(@$path) ."\n";
-}
