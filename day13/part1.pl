@@ -2,6 +2,7 @@ open(HANDLE, "input.txt");
 @lines = <HANDLE>;
 chomp @lines;
 
+# part 2 - added "me"
 my %ha = ("me"=>()); # happiness arrangement
 
 for (@lines) {
